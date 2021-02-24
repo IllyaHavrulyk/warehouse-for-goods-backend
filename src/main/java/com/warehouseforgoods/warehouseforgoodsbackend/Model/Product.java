@@ -18,8 +18,14 @@ public class Product {
     private Long quantity;
     private String description;
     private String imgUrl;
-    @Column(nullable = false)
-    private LocalDateTime date_added;
+    private LocalDateTime dateAdded;
+
+    public Product() {
+    }
+    public Product(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -69,11 +75,11 @@ public class Product {
         this.imgUrl = imgUrl;
     }
 
-    public LocalDateTime getDate_added() {
-        return date_added;
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
     }
 
-    public void setDate_added(LocalDateTime date_added) {
-        this.date_added = date_added;
+    public void setDate_added(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }
