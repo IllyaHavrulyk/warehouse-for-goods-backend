@@ -47,7 +47,7 @@ public class ProductController {
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.CREATED);
     }
 
-    @PutMapping(value="/update",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value="/update/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> updateProduct(@RequestBody Product product, UriComponentsBuilder builder){
         HttpHeaders httpHeaders = new HttpHeaders();
 
