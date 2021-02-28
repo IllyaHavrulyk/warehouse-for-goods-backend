@@ -9,12 +9,14 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    //TODO: Refactor code for crud repository.
+
     @Autowired
     ProductRepository productRepository;
 
     @Override
     public Product getById(Long id){
-        return productRepository.getOne(id);
+        return productRepository.findById(id).get();
     }
 
     @Override
