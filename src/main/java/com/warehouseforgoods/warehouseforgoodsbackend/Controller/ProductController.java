@@ -20,7 +20,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> getProduct(@PathVariable("id") Long id){
         if(id==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -35,7 +35,7 @@ public class ProductController {
         return new ResponseEntity<>(product,HttpStatus.OK);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/save",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> saveProduct(@RequestBody Product product){
         HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -47,7 +47,7 @@ public class ProductController {
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.CREATED);
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value="/update",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> updateProduct(@RequestBody Product product, UriComponentsBuilder builder){
         HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -60,7 +60,7 @@ public class ProductController {
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") Long id){
         Product product = productService.getById(id);
 
@@ -73,7 +73,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAll();
 
