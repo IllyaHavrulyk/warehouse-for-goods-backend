@@ -12,13 +12,9 @@ public class ProductExceptions extends RuntimeException {
     }
 
     public enum Error {
-
-        PRODUCT_DAO_CREATE_FAILED("Product didn't create."),
         PRODUCT_DAO_LIST_FAILED("Can't show list of products"),
         PRODUCT_DAO_GET_FAILED("Haven't found any products with that id"),
-        PRODUCT_DAO_UPDATE_FAILED( "Couldn't update product"),
-        PRODUCT_DAO_DELETE_FAILED("Couldn't delete product with that id"),
-        PRODUCT_DAO_RETURN_NULL("This object doesn't exist");
+        PRODUCT_DAO_UPDATE_FAILED( "Couldn't update product");
 
 
         private String message;

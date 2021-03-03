@@ -5,6 +5,7 @@ import com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductNotFoundExcep
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Product;
 import com.warehouseforgoods.warehouseforgoodsbackend.Repository.ProductRepository;
 import com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductService;
+import com.warehouseforgoods.warehouseforgoodsbackend.Utills.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -34,16 +37,18 @@ public class ProductController {
     @PostMapping(value="/save",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product){
         HttpHeaders httpHeaders = new HttpHeaders();
-
+        product.setDateAdded(LocalDateTime.now());
         productService.save(product);
 
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.CREATED);
     }
 
-    @PutMapping(value="/update/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product, UriComponentsBuilder builder){
+    @PostMapping(value="/update/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product,@PathVariable("id") Long id){
         HttpHeaders httpHeaders = new HttpHeaders();
 
+        Product sourceProduct = productService.getById(id);
+        ObjectMapper.map(sourceProduct,product);
         productService.save(product);
 
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.OK);
@@ -61,6 +66,20 @@ public class ProductController {
     @GetMapping(value="/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAll();
+
+        return new ResponseEntity<>(products,HttpStatus.OK);
+    }
+    @GetMapping(value="/search/{searchValue}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Product>> searchProduct(@PathVariable("searchValue") String searchValue){
+        List<Product> products = productService.search(searchValue);
+
+        return new ResponseEntity<>(products,HttpStatus.OK);
+    }
+    @GetMapping(value="/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Product>> filterProduct(
+            @RequestParam("minPrice")BigDecimal minPrice,
+            @RequestParam("maxPrice")BigDecimal maxPrice){
+        List<Product> products = productService.filter(minPrice,maxPrice);
 
         return new ResponseEntity<>(products,HttpStatus.OK);
     }

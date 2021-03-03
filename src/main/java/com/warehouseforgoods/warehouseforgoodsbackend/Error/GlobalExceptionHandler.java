@@ -26,20 +26,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
        if(ex.getError().equals(ProductExceptions.Error.PRODUCT_DAO_GET_FAILED)){
            response.sendError(HttpStatus.NOT_FOUND.value());
        }
-       if(ex.getError().equals(ProductExceptions.Error.PRODUCT_DAO_CREATE_FAILED)){
-           response.sendError(HttpStatus.METHOD_NOT_ALLOWED.value());
-       }
-        if(ex.getError().equals(ProductExceptions.Error.PRODUCT_DAO_DELETE_FAILED)){
-            response.sendError(HttpStatus.METHOD_NOT_ALLOWED.value());
-        }
         if(ex.getError().equals(ProductExceptions.Error.PRODUCT_DAO_LIST_FAILED)){
             response.sendError(HttpStatus.NOT_FOUND.value());
         }
         if(ex.getError().equals(ProductExceptions.Error.PRODUCT_DAO_UPDATE_FAILED)){
             response.sendError(HttpStatus.METHOD_NOT_ALLOWED.value());
-        }
-        if(ex.getError().equals(ProductExceptions.Error.PRODUCT_DAO_RETURN_NULL)){
-            response.sendError(HttpStatus.NOT_FOUND.value());
         }
     }
     @ExceptionHandler(ConstraintViolationException.class)

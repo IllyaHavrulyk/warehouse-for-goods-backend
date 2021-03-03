@@ -9,7 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -26,7 +29,6 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void save(Product product) {
         productRepository.save(product);
-        //       throw new ProductExceptions(ProductExceptions.Error.PRODUCT_DAO_CREATE_FAILED);
     }
 
     @Override
@@ -36,12 +38,36 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        List<Product> products = productRepository.findAll();
+        return productRepository.findAll();
+    }
 
-        if(products.isEmpty()){
-            throw  new ProductExceptions(ProductExceptions.Error.PRODUCT_DAO_LIST_FAILED);
+    @Override
+    public List<Product> search(String searchValue) {
+        List<Product> products = productRepository.findAll();
+        List<Product> foundProducts = new ArrayList<>();
+
+        for (Product product: products) {
+            if(product.getDescription()!=null){
+                if(product.getName().contains(searchValue) || product.getDescription().contains(searchValue)){
+                    foundProducts.add(product);
+                }
+            }else {
+                if(product.getName().contains(searchValue)){
+                    foundProducts.add(product);
+                }
+            }
         }
 
-        return products;
+        return foundProducts;
+    }
+
+    @Override
+    public List<Product> filter (BigDecimal minPrice,BigDecimal maxPrice){
+        List<Product> products = productRepository.findAll();
+
+        return products.stream()
+                .filter(product -> (product.getPrice().compareTo(minPrice) >= 0)
+                        && (product.getPrice().compareTo(maxPrice) <= 0))
+                .collect(Collectors.toList());
     }
 }

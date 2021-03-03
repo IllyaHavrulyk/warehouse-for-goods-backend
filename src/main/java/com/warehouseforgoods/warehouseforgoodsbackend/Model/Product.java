@@ -80,7 +80,7 @@ public class Product {
         return dateAdded;
     }
 
-    public void setDate_added(LocalDateTime dateAdded) {
+    public void setDateAdded(LocalDateTime dateAdded) {
         this.dateAdded = dateAdded;
     }
 }
