@@ -1,12 +1,9 @@
 package com.warehouseforgoods.warehouseforgoodsbackend.Service;
 
 import com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductExceptions;
-import com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductNotFoundException;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Product;
 import com.warehouseforgoods.warehouseforgoodsbackend.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public Product getById(Long id){
+    public Product getById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new ProductExceptions(ProductExceptions.Error.PRODUCT_DAO_GET_FAILED));
     }
@@ -46,13 +43,13 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productRepository.findAll();
         List<Product> foundProducts = new ArrayList<>();
 
-        for (Product product: products) {
-            if(product.getDescription()!=null){
-                if(product.getName().contains(searchValue) || product.getDescription().contains(searchValue)){
+        for (Product product : products) {
+            if (product.getDescription() != null) {
+                if (product.getName().contains(searchValue) || product.getDescription().contains(searchValue)) {
                     foundProducts.add(product);
                 }
-            }else {
-                if(product.getName().contains(searchValue)){
+            } else {
+                if (product.getName().contains(searchValue)) {
                     foundProducts.add(product);
                 }
             }
@@ -62,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> filter (BigDecimal minPrice,BigDecimal maxPrice){
+    public List<Product> filter(BigDecimal minPrice, BigDecimal maxPrice) {
         List<Product> products = productRepository.findAll();
 
         return products.stream()
