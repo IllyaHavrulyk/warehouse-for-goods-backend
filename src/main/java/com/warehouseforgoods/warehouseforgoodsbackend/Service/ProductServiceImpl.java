@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public Product getById(Long id){
+    public Product getById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new ProductExceptions(ProductExceptions.Error.PRODUCT_DAO_GET_FAILED));
     }
@@ -61,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> filter (BigDecimal minPrice,BigDecimal maxPrice){
+    public List<Product> filter(BigDecimal minPrice, BigDecimal maxPrice) {
         List<Product> products = productRepository.findAll();
 
         return products.stream()
