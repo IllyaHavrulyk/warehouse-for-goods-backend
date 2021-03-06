@@ -1,9 +1,6 @@
 package com.warehouseforgoods.warehouseforgoodsbackend.Controller;
 
-
-import com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductNotFoundException;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Product;
-import com.warehouseforgoods.warehouseforgoodsbackend.Repository.ProductRepository;
 import com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductService;
 import com.warehouseforgoods.warehouseforgoodsbackend.Utills.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +10,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -37,9 +32,7 @@ public class ProductController {
     @PostMapping(value="/save",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product){
         HttpHeaders httpHeaders = new HttpHeaders();
-        product.setDateAdded(LocalDateTime.now());
         productService.save(product);
-
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.CREATED);
     }
 
