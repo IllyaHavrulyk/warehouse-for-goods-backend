@@ -12,10 +12,8 @@ public class Product {
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    @NotEmpty(message = "Please provide a name")
     private String name;
     private BigDecimal price;
-    @NotNull(message = "Please provide a quantity")
     private Long quantity;
     private String description;
     private String imgUrl;

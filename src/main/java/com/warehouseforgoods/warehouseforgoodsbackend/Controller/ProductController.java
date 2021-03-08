@@ -30,14 +30,14 @@ public class ProductController {
     }
 
     @PostMapping(value="/save",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product){
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
         HttpHeaders httpHeaders = new HttpHeaders();
         productService.save(product);
         return new ResponseEntity<>(product,httpHeaders,HttpStatus.CREATED);
     }
 
     @PostMapping(value="/update/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product,@PathVariable("id") Long id){
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable("id") Long id){
         HttpHeaders httpHeaders = new HttpHeaders();
 
         Product sourceProduct = productService.getById(id);
