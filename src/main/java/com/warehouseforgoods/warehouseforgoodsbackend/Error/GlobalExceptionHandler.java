@@ -37,6 +37,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public void constraintViolationException(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public void userAlreadyExistExceptionHandler(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.CONFLICT.value());
+    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
