@@ -20,6 +20,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/login")
+    public ResponseEntity<Object> getCurrentUser(@AuthenticationPrincipal User user){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(principal.equals("anonymousUser")){
+            return new ResponseEntity<>(0, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(1, HttpStatus.OK);
+    }
+
 
     @GetMapping("/user/list")
     public List<User> getUsers(){
