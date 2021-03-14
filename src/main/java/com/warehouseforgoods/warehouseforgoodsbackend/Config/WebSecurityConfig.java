@@ -34,17 +34,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                .anyRequest()
                .authenticated()
                .and()
-               //.formLogin().loginProcessingUrl("/login")
-               //.loginPage("/login").permitAll()
-               .httpBasic();
-               /*.defaultSuccessUrl("/product/list")
+               .httpBasic()
+               .and()
+               .formLogin().loginPage("/login").permitAll()
                .and()
                .logout()
                .logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))
                .invalidateHttpSession(true)
                .clearAuthentication(true)
-               .deleteCookies("JSESSIONID")
-               .logoutSuccessUrl("/login");*/
+               .deleteCookies("JSESSIONID");
    }
    @Override
    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder){
