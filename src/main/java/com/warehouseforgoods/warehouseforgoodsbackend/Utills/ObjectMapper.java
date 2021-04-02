@@ -19,5 +19,8 @@ public class ObjectMapper {
         if(targetProduct.getDateAdded()==null){
             targetProduct.setDateAdded(sourceProduct.getDateAdded());
         }
+        if(targetProduct.getWarehouse()==null){
+            targetProduct.setWarehouse(sourceProduct.getWarehouse());
+        }
     }
 }
