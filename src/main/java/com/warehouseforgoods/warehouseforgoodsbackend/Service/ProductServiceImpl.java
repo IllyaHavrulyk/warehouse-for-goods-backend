@@ -62,8 +62,8 @@ public class ProductServiceImpl implements ProductService {
     public void save(Product product, Long warehouseId) {
         product.setDateAdded(LocalDateTime.now());
         Warehouse warehouse = warehouseService.getById(warehouseId);
-        checkAuthorities(product);
         warehouse.addProduct(product);
+        checkAuthorities(product);
         productRepository.save(product);
         warehouseRepository.save(warehouse);
     }
