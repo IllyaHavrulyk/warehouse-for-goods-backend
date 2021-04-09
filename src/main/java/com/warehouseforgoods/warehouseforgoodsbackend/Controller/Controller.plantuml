@@ -1,0 +1,56 @@
+@startuml
+
+title __Пакет Config__\n
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Controller.ProductController {
+            + deleteProduct()
+            + filterProduct()
+            + getAllProducts()
+            + getProduct()
+            + saveProduct()
+            + searchProduct()
+            + updateProduct()
+        }
+
+
+
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Controller.UserController {
+            + getCurrentUser()
+            + getUsers()
+            + registration()
+        }
+
+
+
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Controller.WarehouseController {
+            + deleteProduct()
+            + getAllProducts()
+            + saveWarehouse()
+        }
+
+
+
+  
+
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.ProductController o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.ProductRepository : productRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.ProductController o-- com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductService : productService
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.ProductController o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : userRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.UserController o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : userRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.UserController o-- com.warehouseforgoods.warehouseforgoodsbackend.Service.UserService : userService
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.WarehouseController o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : userRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Controller.WarehouseController o-- com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseService : warehouseService
+
+
+right footer
+
+
+endfooter
+
+@enduml

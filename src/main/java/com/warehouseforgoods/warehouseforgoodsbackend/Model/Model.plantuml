@@ -1,0 +1,115 @@
+@startuml
+
+title __Пакет Model__\n
+
+
+        enum Permission {
+          READ
+          WRITE
+          permission
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Model.Product {
+            - dateAdded : LocalDateTime
+            - description : String
+            - id : Long
+            - imgUrl : String
+            - name : String
+            - price : BigDecimal
+            - quantity : Long
+            + Product()
+            + Product()
+            + getDateAdded()
+            + getDescription()
+            + getId()
+            + getImgUrl()
+            + getName()
+            + getPrice()
+            + getQuantity()
+            + getWarehouse()
+            + setDateAdded()
+            + setDescription()
+            + setId()
+            + setImgUrl()
+            + setName()
+            + setPrice()
+            + setQuantity()
+            + setWarehouse()
+        }
+  
+
+
+        enum Role {
+          ADMIN
+          USER
+          permissions
+        }
+  
+
+
+        enum Status {
+          ACTIVE
+          BANNED
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Model.User {
+            - id : Long
+            - password : String
+            - username : String
+            - warehouses : List<Warehouse>
+            + User()
+            + addWarehouse()
+            + getId()
+            + getPassword()
+            + getRole()
+            + getStatus()
+            + getUsername()
+            + getWarehouses()
+            + removeProduct()
+            + setId()
+            + setPassword()
+            + setRole()
+            + setStatus()
+            + setUsername()
+            - setWarehouses()
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Model.Warehouse {
+            - id : Long
+            - name : String
+            - products : List<Product>
+            + Warehouse()
+            + addProduct()
+            + getId()
+            + getName()
+            + getProducts()
+            + getUser()
+            + removeProduct()
+            + setId()
+            + setName()
+            + setUser()
+            - setProducts()
+        }
+  
+
+  com.warehouseforgoods.warehouseforgoodsbackend.Model.Product o-- com.warehouseforgoods.warehouseforgoodsbackend.Model.Warehouse : warehouse
+  com.warehouseforgoods.warehouseforgoodsbackend.Model.User o-- com.warehouseforgoods.warehouseforgoodsbackend.Model.Role : role
+  com.warehouseforgoods.warehouseforgoodsbackend.Model.User o-- com.warehouseforgoods.warehouseforgoodsbackend.Model.Status : status
+  com.warehouseforgoods.warehouseforgoodsbackend.Model.Warehouse o-- com.warehouseforgoods.warehouseforgoodsbackend.Model.User : user
+
+
+right footer
+
+
+
+
+
+endfooter
+
+@enduml

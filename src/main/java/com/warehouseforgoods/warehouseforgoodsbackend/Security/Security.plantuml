@@ -1,0 +1,32 @@
+@startuml
+
+title __Пакет Security__\n
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Security.SecurityUser {
+            - authorities : List<SimpleGrantedAuthority>
+            - isActive : boolean
+            - password : String
+            - username : String
+            + SecurityUser()
+            {static} + fromUser()
+            + getAuthorities()
+            + getPassword()
+            + getUsername()
+            + isAccountNonExpired()
+            + isAccountNonLocked()
+            + isCredentialsNonExpired()
+            + isEnabled()
+        }
+  
+
+  com.warehouseforgoods.warehouseforgoodsbackend.Security.SecurityUser .up.|> org.springframework.security.core.userdetails.UserDetails
+
+
+right footer
+
+
+
+endfooter
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+title __Головний клас додатку__\n
+
+
+      class com.warehouseforgoods.warehouseforgoodsbackend.WarehouseForGoodsBackendApplication {
+          + corsConfigurer()
+          {static} + main()
+      }
+  
+
+
+
+right footer
+
+
+
+endfooter
+
+@enduml

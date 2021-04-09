@@ -1,0 +1,82 @@
+@startuml
+
+title __Пакет Error__\n
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Error.AuthorityException {
+            + AuthorityException()
+        }
+
+
+
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Error.GlobalExceptionHandler {
+            + authorityExceptionHandler()
+            + constraintViolationException()
+            + springHandleProductExceptions()
+            + userExceptionsHandler()
+            # handleMethodArgumentNotValid()
+        }
+
+
+
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductExceptions {
+            + ProductExceptions()
+            + getError()
+        }
+
+
+
+  
+
+
+        enum Error {
+          PRODUCT_DAO_GET_FAILED
+          PRODUCT_DAO_LIST_FAILED
+          PRODUCT_DAO_UPDATE_FAILED
+          message
+        }
+
+
+
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions {
+            + UserExceptions()
+            + getError()
+        }
+
+
+
+  
+
+
+        enum Error {
+          USER_DAO_GET_BY_EMAIL_FAILED
+          USER_DAO_GET_FAILED
+          message
+        }
+
+
+
+  
+
+  com.warehouseforgoods.warehouseforgoodsbackend.Error.GlobalExceptionHandler -up-|> org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
+  com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductExceptions o-- com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductExceptions.Error : error
+  com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductExceptions +-down- com.warehouseforgoods.warehouseforgoodsbackend.Error.ProductExceptions.Error
+  com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions o-- com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions.Error : error
+  com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions +-down- com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions.Error
+
+
+right footer
+
+
+endfooter
+
+@enduml

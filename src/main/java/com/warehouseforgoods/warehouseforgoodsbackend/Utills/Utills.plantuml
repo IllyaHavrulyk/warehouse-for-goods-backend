@@ -1,0 +1,19 @@
+@startuml
+
+title __Пакет Utils__\n
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Utills.ObjectMapper {
+            {static} + map()
+        }
+  
+
+
+
+right footer
+
+
+
+endfooter
+
+@enduml

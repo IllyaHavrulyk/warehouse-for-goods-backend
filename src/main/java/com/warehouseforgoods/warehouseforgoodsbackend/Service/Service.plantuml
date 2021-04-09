@@ -1,0 +1,97 @@
+@startuml
+
+title __Пакет Service__\n
+
+
+        interface com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductService {
+            {abstract} + delete()
+            {abstract} + filter()
+            {abstract} + getAll()
+            {abstract} + getById()
+            {abstract} + save()
+            {abstract} + search()
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductServiceImpl {
+            + delete()
+            + filter()
+            + getAll()
+            + getById()
+            + save()
+            + search()
+            - checkAuthorities()
+            - containsInDescription()
+            - containsInName()
+            - getCurrentUser()
+            - isProductBelongToPrincipal()
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Service.UserDetailsServiceImpl {
+            + UserDetailsServiceImpl()
+            + loadUserByUsername()
+        }
+  
+
+
+        interface com.warehouseforgoods.warehouseforgoodsbackend.Service.UserService {
+            {abstract} + delete()
+            {abstract} + getAll()
+            {abstract} + getById()
+            {abstract} + save()
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Service.UserServiceImpl {
+            - passwordEncoder : PasswordEncoder
+            + delete()
+            + getAll()
+            + getById()
+            + save()
+        }
+  
+
+
+        interface com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseService {
+            {abstract} + delete()
+            {abstract} + getAll()
+            {abstract} + getById()
+            {abstract} + save()
+        }
+  
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseServiceImpl {
+            + delete()
+            + getAll()
+            + getById()
+            + save()
+            - getCurrentUser()
+        }
+  
+
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductServiceImpl .up.|> com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductService
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.ProductRepository : productRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : userRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.WarehouseRepository : warehouseRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.ProductServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseService : warehouseService
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.UserDetailsServiceImpl .up.|> org.springframework.security.core.userdetails.UserDetailsService
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.UserDetailsServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : repository
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.UserServiceImpl .up.|> com.warehouseforgoods.warehouseforgoodsbackend.Service.UserService
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.UserServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : userRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseServiceImpl .up.|> com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseService
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository : userRepository
+  com.warehouseforgoods.warehouseforgoodsbackend.Service.WarehouseServiceImpl o-- com.warehouseforgoods.warehouseforgoodsbackend.Repository.WarehouseRepository : warehouseRepository
+
+
+right footer
+
+
+
+endfooter
+
+@enduml
