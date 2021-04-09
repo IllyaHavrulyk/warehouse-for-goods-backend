@@ -1,0 +1,27 @@
+@startuml
+
+title __Пакет Config__\n
+
+
+        class com.warehouseforgoods.warehouseforgoodsbackend.Config.WebSecurityConfig {
+            - userDetailsService : UserDetailsService
+            + WebSecurityConfig()
+            # configure()
+            # configure()
+            # daoAuthenticationProvider()
+            # passwordEncoder()
+        }
+
+
+
+  
+
+  com.warehouseforgoods.warehouseforgoodsbackend.Config.WebSecurityConfig -up-|> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+
+
+right footer
+
+
+endfooter
+
+@enduml

@@ -37,9 +37,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public void constraintViolationException(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
-    @ExceptionHandler(UserAlreadyExistException.class)
-    public void userAlreadyExistExceptionHandler(HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.CONFLICT.value());
+    @ExceptionHandler(AuthorityException.class)
+    public void authorityExceptionHandler(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.METHOD_NOT_ALLOWED.value());
+    }
+    @ExceptionHandler(UserExceptions.class)
+    public void userExceptionsHandler(HttpServletResponse response,UserExceptions ex) throws IOException {
+        if(ex.getError().equals(UserExceptions.Error.USER_DAO_GET_BY_EMAIL_FAILED)){
+            response.sendError(HttpStatus.CONFLICT.value());
+        }
+        if(ex.getError().equals(UserExceptions.Error.USER_DAO_GET_FAILED)){
+            response.sendError(HttpStatus.NOT_FOUND.value());
+        }
     }
 
     @Override

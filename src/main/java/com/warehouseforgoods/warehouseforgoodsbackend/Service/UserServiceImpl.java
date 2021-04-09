@@ -1,6 +1,6 @@
 package com.warehouseforgoods.warehouseforgoodsbackend.Service;
 
-import com.warehouseforgoods.warehouseforgoodsbackend.Error.UserAlreadyExistException;
+import com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Role;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Status;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.User;
@@ -10,18 +10,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User getById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(
+                () -> new UserExceptions(UserExceptions.Error.USER_DAO_GET_FAILED)
+        );
     }
 
     @Override
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService{
             user.setStatus(Status.ACTIVE);
             userRepository.save(user);
         }
-        else throw new UserAlreadyExistException("User with this username already exist");
+        else throw new UserExceptions(UserExceptions.Error.USER_DAO_GET_BY_EMAIL_FAILED);
     }
 
     @Override

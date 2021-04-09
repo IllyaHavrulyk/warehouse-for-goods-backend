@@ -1,0 +1,29 @@
+@startuml
+
+title __Пакет Repository__\n
+
+
+        interface com.warehouseforgoods.warehouseforgoodsbackend.Repository.ProductRepository {
+        }
+  
+
+
+        interface com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository {
+            {abstract} + findByUsername()
+        }
+  
+
+
+        interface com.warehouseforgoods.warehouseforgoodsbackend.Repository.WarehouseRepository {
+        }
+  
+
+
+
+right footer
+
+
+
+endfooter
+
+@enduml

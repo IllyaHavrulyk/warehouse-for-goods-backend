@@ -2,6 +2,10 @@ package com.warehouseforgoods.warehouseforgoodsbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class WarehouseForGoodsBackendApplication {
@@ -10,6 +14,16 @@ public class WarehouseForGoodsBackendApplication {
         SpringApplication.run(WarehouseForGoodsBackendApplication.class, args);
     }
 
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*").exposedHeaders("Access-Control-Allow-Origin", "authorization", "Authorization");
+            }
+        };
+    }
 }
 
 /*spring.h2.console.enabled=true

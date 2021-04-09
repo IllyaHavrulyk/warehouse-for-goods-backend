@@ -1,7 +1,11 @@
 package com.warehouseforgoods.warehouseforgoodsbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "User")
@@ -17,8 +21,22 @@ public class User {
     private Role role;
     @Enumerated(value = EnumType.STRING)
     private Status status;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private List<Warehouse> warehouses = new ArrayList<>();
+
+
 
     public User(){
+    }
+
+    public void addWarehouse(Warehouse warehouse){
+        warehouses.add(warehouse);
+        warehouse.setUser(this);
+    }
+    public void removeProduct(Warehouse warehouse){
+        warehouses.remove(warehouse);
+        warehouse.setUser(null);
     }
 
     public Status getStatus() {
@@ -59,5 +77,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Warehouse> getWarehouses() {
+        return warehouses;
+    }
+
+    private void setWarehouses(List<Warehouse> warehouses) {
+        this.warehouses = warehouses;
     }
 }
