@@ -1,5 +1,6 @@
 package com.warehouseforgoods.warehouseforgoodsbackend.Service;
 
+import com.warehouseforgoods.warehouseforgoodsbackend.Error.UserExceptions;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.User;
 import com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository;
 import com.warehouseforgoods.warehouseforgoodsbackend.Security.SecurityUser;
@@ -21,8 +22,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username).orElseThrow(()->
-                new UsernameNotFoundException("User doesn't exist"));
+        User user = repository.findByUsername(username).orElseThrow(
+                ()-> new UserExceptions(UserExceptions.Error.USER_DAO_GET_BY_EMAIL_FAILED)
+        );
         return SecurityUser.fromUser(user);
     }
 }

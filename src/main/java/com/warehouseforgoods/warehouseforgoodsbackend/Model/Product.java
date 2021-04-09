@@ -1,8 +1,8 @@
 package com.warehouseforgoods.warehouseforgoodsbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,6 +18,11 @@ public class Product {
     private String description;
     private String imgUrl;
     private LocalDateTime dateAdded;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="warehouse_id")
+    private Warehouse warehouse;
 
     public Product() {
     }
@@ -80,5 +85,13 @@ public class Product {
 
     public void setDateAdded(LocalDateTime dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 }
