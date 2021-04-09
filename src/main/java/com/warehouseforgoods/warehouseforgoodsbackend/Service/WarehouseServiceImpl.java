@@ -5,6 +5,7 @@ import com.warehouseforgoods.warehouseforgoodsbackend.Model.User;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Warehouse;
 import com.warehouseforgoods.warehouseforgoodsbackend.Repository.UserRepository;
 import com.warehouseforgoods.warehouseforgoodsbackend.Repository.WarehouseRepository;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public void save(Warehouse warehouse, Principal principal) {
         User currentUser = getCurrentUser(principal);
+        warehouse.setDateAdded(LocalDateTime.now());
         currentUser.addWarehouse(warehouse);
         warehouseRepository.save(warehouse);
         userRepository.save(currentUser);
