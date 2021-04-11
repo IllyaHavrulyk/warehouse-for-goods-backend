@@ -22,7 +22,7 @@ public class WarehouseForGoodsBackendApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("https://fierce-gorge-15492.herokuapp.com").allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*").exposedHeaders("Access-Control-Allow-Origin", "authorization", "Authorization");
+                registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowCredentials(true).allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*").exposedHeaders("Access-Control-Allow-Origin", "authorization", "Authorization");
             }
         };
     }

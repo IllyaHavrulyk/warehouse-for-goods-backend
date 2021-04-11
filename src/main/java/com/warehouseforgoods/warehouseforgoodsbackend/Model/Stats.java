@@ -22,10 +22,23 @@ public class Stats {
   private Long id;
 
   @ElementCollection
-  @MapKeyColumn(name = "month")
-  @Column(name = "warehouses")
+  @MapKeyColumn(name = "month_warehouses")
+  @Column(name = "warehouses_per_month")
   private Map<String, Integer> warehousesCreatedPerEveryMonth;
 
+
+  @ElementCollection
+  @MapKeyColumn(name = "month_products")
+  @Column(name = "products_per_month")
+  private Map<String , Integer> productsCreatedPerEveryMonth;
+
+  public Map<String, Integer> getProductsCreatedPerEveryMonth() {
+    return productsCreatedPerEveryMonth;
+  }
+
+  public void setProductsCreatedPerEveryMonth(Map<String, Integer> productsCreatedPerEveryMonth) {
+    this.productsCreatedPerEveryMonth = productsCreatedPerEveryMonth;
+  }
 
   public Map<String, Integer> getWarehousesCreatedPerEveryMonth() {
     return warehousesCreatedPerEveryMonth;

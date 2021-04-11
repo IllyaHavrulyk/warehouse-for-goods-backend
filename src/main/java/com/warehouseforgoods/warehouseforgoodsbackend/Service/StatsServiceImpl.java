@@ -18,6 +18,7 @@ public class StatsServiceImpl implements StatsService{
   public List<Stats> getAll() {
     Stats stats = statsRepository.findAll().get(0);
     stats.setWarehousesCreatedPerEveryMonth(StatsUtils.sortMapByMonths(stats.getWarehousesCreatedPerEveryMonth()));
+    stats.setProductsCreatedPerEveryMonth(StatsUtils.sortMapByMonths(stats.getProductsCreatedPerEveryMonth()));
     List<Stats> statsList = statsRepository.findAll();
     statsList.set(0,stats);
     return statsList;
