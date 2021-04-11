@@ -3,6 +3,8 @@ package com.warehouseforgoods.warehouseforgoodsbackend.Service;
 import com.warehouseforgoods.warehouseforgoodsbackend.Model.Stats;
 import com.warehouseforgoods.warehouseforgoodsbackend.Repository.StatsRepository;
 import java.util.List;
+
+import com.warehouseforgoods.warehouseforgoodsbackend.Utills.StatsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class StatsServiceImpl implements StatsService{
 
   @Override
   public List<Stats> getAll() {
-    return statsRepository.findAll();
+    Stats stats = statsRepository.findAll().get(0);
+    stats.setWarehousesCreatedPerEveryMonth(StatsUtils.sortMapByMonths(stats.getWarehousesCreatedPerEveryMonth()));
+    List<Stats> statsList = statsRepository.findAll();
+    statsList.set(0,stats);
+    return statsList;
   }
 }
