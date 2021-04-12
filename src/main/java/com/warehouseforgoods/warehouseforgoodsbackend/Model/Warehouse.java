@@ -18,7 +18,7 @@ public class Warehouse {
 
     @JsonBackReference
     @JoinColumn(name = "user_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @JsonManagedReference
