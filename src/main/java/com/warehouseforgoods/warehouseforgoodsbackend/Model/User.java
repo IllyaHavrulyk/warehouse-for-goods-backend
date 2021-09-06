@@ -2,6 +2,8 @@ package com.warehouseforgoods.warehouseforgoodsbackend.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -22,10 +24,18 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Status status;
     @JsonManagedReference
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Warehouse> warehouses = new ArrayList<>();
 
+    private LocalDateTime registeredAt;
 
+    public LocalDateTime getRegisteredAt() {
+        return registeredAt;
+    }
+
+    public void setRegisteredAt(LocalDateTime registeredAt) {
+        this.registeredAt = registeredAt;
+    }
 
     public User(){
     }

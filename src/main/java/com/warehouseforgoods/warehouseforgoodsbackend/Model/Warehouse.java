@@ -3,6 +3,7 @@ package com.warehouseforgoods.warehouseforgoodsbackend.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,12 +18,14 @@ public class Warehouse {
 
     @JsonBackReference
     @JoinColumn(name = "user_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "warehouse")
     private List<Product> products;
+
+    private LocalDateTime dateAdded;
 
     public Warehouse() {
     }
@@ -66,5 +69,13 @@ public class Warehouse {
 
     private void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }
